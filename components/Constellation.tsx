@@ -102,9 +102,9 @@ export default function Constellation({ onStoryContinue }: ConstellationProps) {
             {introStep === 1 && (
               <motion.p
                 key="intro-1"
-                initial={{ opacity: 0, y: 15, filter: "blur(6px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -15, filter: "blur(6px)" }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 1 }}
                 className="font-editorial text-xl sm:text-3xl md:text-4xl text-white italic font-normal drop-shadow-md"
               >
@@ -115,9 +115,9 @@ export default function Constellation({ onStoryContinue }: ConstellationProps) {
             {introStep === 2 && (
               <motion.p
                 key="intro-2"
-                initial={{ opacity: 0, y: 15, filter: "blur(6px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -15, filter: "blur(6px)" }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 1 }}
                 className="font-editorial text-xl sm:text-3xl md:text-4xl text-[#FFD7E5] italic font-normal drop-shadow-md"
               >
@@ -249,9 +249,9 @@ export default function Constellation({ onStoryContinue }: ConstellationProps) {
         >
           {/* Photo Frame */}
           <motion.div
-            initial={{ scale: 1.1, filter: "blur(16px)" }}
-            animate={{ scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ scale: 1.05 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
             className="w-[88vw] max-w-[460px] h-[44vh] sm:h-[54vh] md:h-[58vh] max-h-[580px] rounded-2xl overflow-hidden border border-[#D6B36A]/40 shadow-[0_20px_70px_rgba(214,179,106,0.2)] mb-4 sm:mb-6 relative"
           >
             <CinematicPhoto

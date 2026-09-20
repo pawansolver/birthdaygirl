@@ -41,10 +41,10 @@ export default function CinematicPhoto({
     >
       {!hasError ? (
         <>
-          {/* Ambient blurred backdrop when fitMode is contain to fill letterbox seamlessly */}
+          {/* Ambient blurred backdrop on desktop only (hidden on mobile to save GPU memory and prevent lag) */}
           {fitMode === "contain" && (
             <div
-              className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-1000 ${
+              className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-1000 hidden md:block ${
                 isLoaded ? "opacity-35" : "opacity-0"
               }`}
             >

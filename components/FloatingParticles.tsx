@@ -53,7 +53,8 @@ export default function FloatingParticles({
             width: `${p.size}px`,
             height: `${p.size}px`,
             opacity: p.opacity,
-            boxShadow: `0 0 ${p.size * 3}px rgba(232, 180, 200, 0.6)`,
+            boxShadow: `0 0 ${p.size * 2}px rgba(232, 180, 200, 0.4)`,
+            willChange: "transform",
             animation: `floatParticle ${p.duration}s infinite ease-in-out ${p.delay}s alternate`,
           }}
         />
@@ -61,13 +62,13 @@ export default function FloatingParticles({
       <style jsx>{`
         @keyframes floatParticle {
           0% {
-            transform: translateY(0px) translateX(0px);
+            transform: translate3d(0px, 0px, 0);
           }
           50% {
-            transform: translateY(-24px) translateX(12px);
+            transform: translate3d(12px, -24px, 0);
           }
           100% {
-            transform: translateY(18px) translateX(-14px);
+            transform: translate3d(-14px, 18px, 0);
           }
         }
       `}</style>

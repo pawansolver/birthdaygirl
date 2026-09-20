@@ -37,7 +37,6 @@ export default function CinematicGate({ onOpenGate }: CinematicGateProps) {
         animate={{
           opacity: isOpening ? 0 : 1,
           scale: isOpening ? 0.95 : 1,
-          filter: isOpening ? "blur(10px)" : "blur(0px)",
         }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
         className="relative z-30 max-w-lg mx-auto px-4 sm:px-6 text-center flex flex-col items-center"

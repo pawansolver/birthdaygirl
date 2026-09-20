@@ -32,27 +32,30 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
 
   const { ch01, ch02, ch03, ch04, ch06, ch07, ch08 } = loveStory.chapters;
 
-  // Track scroll position to update currentChapter
+  // Track visible chapter using IntersectionObserver (0 layout reflows, buttery smooth 60fps on mobile)
   useEffect(() => {
-    const handleScroll = () => {
-      const chapters = Array.from({ length: 12 }, (_, i) => i + 1);
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-
-      for (const ch of chapters) {
-        const el = document.getElementById(`chapter-${ch < 10 ? `0${ch}` : ch}`);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setCurrentChapter(ch);
-            break;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            const match = id.match(/chapter-(\d+)/);
+            if (match) {
+              setCurrentChapter(parseInt(match[1], 10));
+            }
           }
         }
+      },
+      {
+        rootMargin: "-25% 0px -55% 0px",
+        threshold: 0,
       }
-    };
+    );
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const chapterElements = document.querySelectorAll('[id^="chapter-"]');
+    chapterElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
   }, []);
 
   const scrollToChapter = (ch: number) => {
@@ -63,7 +66,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-[#050308] text-[#FFF7FA] snap-y snap-proximity">
+    <div className="relative w-full min-h-screen bg-[#050308] text-[#FFF7FA]">
       {/* Subtle Chapter Progress & Navigation */}
       <ProgressIndicator
         currentChapter={currentChapter}

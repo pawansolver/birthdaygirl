@@ -156,27 +156,43 @@ export default function MusicController({
     }
   }, [isLowerVolume, isMuted, volume]);
 
-  // Auto-lower volume on Chapter 10 (Love letter) & Chapter 11 (Secret)
+  // Auto-lower volume on Chapter 10 (Love letter) & Chapter 11 (Secret) using IntersectionObserver
   useEffect(() => {
-    const handleScroll = () => {
-      if (!audioRef.current || isMuted) return;
-      const letterEl = document.getElementById("chapter-10");
-      const secretEl = document.getElementById("chapter-11");
-      const inView = (el: HTMLElement | null) => {
-        if (!el) return false;
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.2;
-      };
+    if (!audioRef.current || isMuted) return;
 
-      const shouldLower = inView(letterEl) || inView(secretEl);
+    let isChapter10InView = false;
+    let isChapter11InView = false;
+
+    const updateVolume = () => {
+      if (!audioRef.current || isMuted) return;
+      const shouldLower = isChapter10InView || isChapter11InView;
       const targetVol = shouldLower ? 0.22 : volume;
       if (Math.abs(audioRef.current.volume - targetVol) > 0.05) {
         audioRef.current.volume = targetVol;
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === "chapter-10") {
+            isChapter10InView = entry.isIntersecting;
+          }
+          if (entry.target.id === "chapter-11") {
+            isChapter11InView = entry.isIntersecting;
+          }
+        });
+        updateVolume();
+      },
+      { threshold: 0.2 }
+    );
+
+    const letterEl = document.getElementById("chapter-10");
+    const secretEl = document.getElementById("chapter-11");
+    if (letterEl) observer.observe(letterEl);
+    if (secretEl) observer.observe(secretEl);
+
+    return () => observer.disconnect();
   }, [isMuted, volume]);
 
   const startPlaying = useCallback(() => {

@@ -23,9 +23,9 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
   color-scheme: dark;
   background-color: #050308;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -35,6 +35,8 @@ body {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 /* Custom romantic selection highlight */
@@ -145,7 +147,8 @@ body {
 
 .animate-wedding-zoom {
   animation: wedding-slow-zoom 14s ease-in-out infinite alternate;
-  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 /* Golden Lens Flare Sweep (Anamorphic Light Leak) */
@@ -169,6 +172,7 @@ body {
 .animate-wedding-sweep {
   animation: wedding-light-sweep 9s ease-in-out infinite;
   pointer-events: none;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Luxury Golden Breathing Halo Pulse */
@@ -183,6 +187,7 @@ body {
 
 .animate-wedding-halo {
   animation: wedding-halo-pulse 4s ease-in-out infinite;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Gentle Floating Bobbing for Memory Bubbles */
@@ -197,6 +202,7 @@ body {
 
 .animate-bubble-float {
   animation: wedding-bubble-float 5s ease-in-out infinite;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Golden Sparkle Twinkle */
@@ -213,6 +219,23 @@ body {
 
 .animate-sparkle-twinkle {
   animation: wedding-sparkle-twinkle 3s ease-in-out infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Mobile-specific performance tuning: keep smooth 60fps */
+@media (max-width: 768px) {
+  .animate-wedding-sweep {
+    display: none !important;
+  }
+  .animate-wedding-halo {
+    animation: none !important;
+    box-shadow: 0 0 35px rgba(214, 179, 106, 0.35) !important;
+  }
+  .glass-luxury,
+  .glass-luxury-gold {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
 }
 
 /* Reduced motion accessibility */

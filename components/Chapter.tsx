@@ -55,7 +55,7 @@ export default function Chapter({
   return (
     <section
       id={sectionId}
-      className={`relative w-full min-h-[100dvh] py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-12 flex flex-col items-center justify-center border-b border-[#E8B4C8]/10 snap-start shrink-0 ${className}`}
+      className={`relative w-full min-h-[100dvh] py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-12 flex flex-col items-center justify-center border-b border-[#E8B4C8]/10 ${className}`}
     >
       {/* Chapter Editorial Header */}
       <motion.div

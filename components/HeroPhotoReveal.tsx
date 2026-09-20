@@ -40,15 +40,14 @@ export default function HeroPhotoReveal({
       <div className="relative w-full h-full flex flex-col items-center justify-center px-3 sm:px-4 py-4 sm:py-8">
         {/* Hero Photo Container */}
         <motion.div
-          initial={{ opacity: 0, filter: "blur(20px)", scale: 1.08 }}
+          initial={{ opacity: 0, scale: 1.05 }}
           animate={{
             opacity: 1,
-            filter: "blur(0px)",
             scale: isShrunk ? 0.35 : 1,
             y: isShrunk ? -30 : 0,
           }}
           transition={{
-            duration: 1.8,
+            duration: 1.4,
             ease: [0.22, 1, 0.36, 1],
           }}
           className={`relative transition-all duration-1000 ${
