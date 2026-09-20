@@ -1,12 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import HeroExperience, { HeroStep } from "./HeroExperience";
-import StoryExperience from "./StoryExperience";
 import FloatingParticles from "./FloatingParticles";
 import AmbientGlow from "./AmbientGlow";
 import HeartbeatCursor from "./HeartbeatCursor";
 import MusicController from "./MusicController";
+
+// Code-split StoryExperience so all 12 chapters are loaded on-demand, keeping initial mobile load ultra-fast
+const StoryExperience = dynamic(() => import("./StoryExperience"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export type ExperienceStage =
   | "gate"

@@ -52,6 +52,7 @@ export default function CinematicPhoto({
                 src={src}
                 alt=""
                 fill
+                loading="lazy"
                 sizes="50vw"
                 className="object-cover blur-2xl scale-110 pointer-events-none"
                 style={{ objectPosition: desktopObjectPosition }}
@@ -65,39 +66,19 @@ export default function CinematicPhoto({
               isLoaded ? "opacity-100 blur-0 scale-100 animate-wedding-zoom" : "opacity-0 blur-lg scale-105"
             }`}
           >
-            {/* Desktop Image with desktopObjectPosition */}
-            <div className="hidden md:block w-full h-full relative">
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                priority={priority}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 65vw"
-                className={`${
-                  fitMode === "contain" ? "object-contain" : "object-cover"
-                } transition-transform duration-1000 group-hover:scale-[1.03]`}
-                style={{ objectPosition: desktopObjectPosition }}
-                onLoad={() => setIsLoaded(true)}
-                onError={() => setHasError(true)}
-              />
-            </div>
-
-            {/* Mobile Image with mobileObjectPosition */}
-            <div className="block md:hidden w-full h-full relative">
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                priority={priority}
-                sizes="(max-width: 768px) 90vw, 50vw"
-                className={`${
-                  fitMode === "contain" ? "object-contain" : "object-cover"
-                } transition-transform duration-1000 group-hover:scale-[1.03]`}
-                style={{ objectPosition: mobileObjectPosition }}
-                onLoad={() => setIsLoaded(true)}
-                onError={() => setHasError(true)}
-              />
-            </div>
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              priority={priority}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 65vw"
+              className={`${
+                fitMode === "contain" ? "object-contain" : "object-cover"
+              } transition-transform duration-1000 group-hover:scale-[1.03]`}
+              style={{ objectPosition: desktopObjectPosition }}
+              onLoad={() => setIsLoaded(true)}
+              onError={() => setHasError(true)}
+            />
           </div>
 
           {/* Wedding Film Anamorphic Golden Light Sweep */}

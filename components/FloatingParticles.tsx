@@ -24,8 +24,12 @@ export default function FloatingParticles({
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
+    // Reduce particle count on mobile devices for smooth 60fps rendering
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const actualCount = isMobile ? Math.min(count, 16) : count;
+
     // Generate particles once on mount
-    const newParticles: Particle[] = Array.from({ length: count }, (_, i) => ({
+    const newParticles: Particle[] = Array.from({ length: actualCount }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,

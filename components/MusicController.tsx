@@ -112,9 +112,11 @@ export default function MusicController({
     }
   }, []);
 
-  // Initialize audio element
+  // Initialize audio element with preload="none" so it doesn't block mobile initial load
   useEffect(() => {
-    const audio = new Audio(audioSrc);
+    const audio = new Audio();
+    audio.preload = "none";
+    audio.src = audioSrc;
     audio.loop = true;
     audio.volume = isMuted ? 0 : volume;
     audioRef.current = audio;
