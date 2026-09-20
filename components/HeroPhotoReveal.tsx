@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import CinematicPhoto from "./CinematicPhoto";
-import { loveStory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface HeroPhotoRevealProps {
   onContinue: () => void;
@@ -16,7 +16,8 @@ export default function HeroPhotoReveal({
   isShrunk = false,
 }: HeroPhotoRevealProps) {
   const [textStep, setTextStep] = useState<number>(0);
-  const { hero } = loveStory;
+  const { story, t } = useLanguage();
+  const { hero } = story;
 
   useEffect(() => {
     // Sequential text reveal
@@ -139,7 +140,7 @@ export default function HeroPhotoReveal({
                   className="group flex flex-col items-center gap-1 sm:gap-1.5 text-white hover:text-[#D6B36A] transition-colors duration-300 cursor-pointer"
                 >
                   <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] font-semibold">
-                    CONTINUE
+                    {t("continue")}
                   </span>
                   <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#D6B36A]/50 flex items-center justify-center group-hover:border-[#D6B36A] group-hover:shadow-[0_0_15px_rgba(214,179,106,0.4)] transition-all">
                     <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D6B36A] animate-bounce" />

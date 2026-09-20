@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export interface ChapterProps {
   id?: string;
@@ -31,6 +32,7 @@ export default function Chapter({
   showNextIndicator = true,
   onNext,
 }: ChapterProps) {
+  const { language, t } = useLanguage();
   const displayNum = chapterNumber || number || "01";
   const sectionId = id || `chapter-${displayNum}`;
 
@@ -67,7 +69,7 @@ export default function Chapter({
       >
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0C0710]/90 border border-[#D6B36A]/40 mb-2 shadow-sm">
           <span className="text-xs font-sans uppercase tracking-[0.25em] text-[#E6CA7E] font-semibold">
-            CHAPTER {displayNum}
+            {language === "hi" ? `अध्याय ${displayNum}` : `CHAPTER ${displayNum}`}
           </span>
         </div>
 
@@ -104,7 +106,7 @@ export default function Chapter({
             aria-label={`Go to next chapter`}
           >
             <span className="text-[10px] sm:text-xs font-sans uppercase tracking-[0.25em] text-[#E6CA7E] font-semibold group-hover:text-[#D6B36A] transition-colors">
-              {nextLabel || "SCROLL DOWN FOR NEXT CHAPTER"}
+              {nextLabel || t("scrollDown")}
             </span>
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#D6B36A]/50 bg-[#0C0710]/90 flex items-center justify-center group-hover:border-[#D6B36A] group-hover:shadow-[0_0_15px_rgba(214,179,106,0.4)] transition-all">
               <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D6B36A] animate-bounce" />

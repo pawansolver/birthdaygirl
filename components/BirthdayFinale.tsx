@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import CinematicPhoto from "./CinematicPhoto";
-import { loveStory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BirthdayFinale() {
-  const { ch12 } = loveStory.chapters;
+  const { story } = useLanguage();
+  const { ch12 } = story.chapters;
   const [step, setStep] = useState(0);
 
   useEffect(() => {
@@ -70,7 +71,7 @@ export default function BirthdayFinale() {
   };
 
   return (
-    <div className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center py-8 sm:py-10 px-4 text-center overflow-hidden bg-[#050308] snap-start shrink-0">
+    <div className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center py-8 sm:py-10 px-4 text-center overflow-hidden bg-[#050308]">
       {/* Tiny warm light blooming in the dark */}
       <AnimatePresence>
         {step >= 1 && (
@@ -86,13 +87,12 @@ export default function BirthdayFinale() {
       <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center px-2 sm:px-4">
         {/* Her Final Image slowly appearing */}
         <motion.div
-          initial={{ opacity: 0, scale: 1.08, filter: "blur(20px)" }}
+          initial={{ opacity: 0, scale: 1.05 }}
           animate={{
             opacity: step >= 1 ? 1 : 0,
-            scale: step >= 1 ? 1 : 1.08,
-            filter: step >= 1 ? "blur(0px)" : "blur(20px)",
+            scale: 1,
           }}
-          transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
           className="w-[88vw] max-w-[360px] h-[36vh] sm:h-[44vh] md:h-[48vh] max-h-[460px] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#D6B36A]/40 shadow-[0_30px_90px_rgba(214,179,106,0.25)] mb-4 sm:mb-6 relative animate-wedding-halo"
         >
           <CinematicPhoto

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { LanguageProvider } from "@/context/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 import HeroExperience, { HeroStep } from "./HeroExperience";
 import FloatingParticles from "./FloatingParticles";
 import AmbientGlow from "./AmbientGlow";
@@ -60,36 +62,41 @@ export default function ExperienceController() {
   }, [stage]);
 
   return (
-    <main className="relative w-full min-h-screen bg-[#050308] text-[#FFF7FA] overflow-x-hidden selection:bg-[#160A13] selection:text-[#E8B4C8]">
-      {/* Ambient Lighting & Dust Particles */}
-      <AmbientGlow
-        variant={
-          stage === "gate" || stage === "hero"
-            ? "hero"
-            : stage === "memories" || stage === "constellation"
-            ? "universe"
-            : "subtle"
-        }
-      />
-      <FloatingParticles slowDown={stage === "hero"} />
+    <LanguageProvider>
+      <main className="relative w-full min-h-screen bg-[#050308] text-[#FFF7FA] overflow-x-hidden selection:bg-[#160A13] selection:text-[#E8B4C8]">
+        {/* Sleek Golden Language Switcher (EN | हिं) */}
+        <LanguageToggle />
 
-      {/* Desktop Heartbeat Custom Cursor */}
-      <HeartbeatCursor />
-
-      {/* Opening Hero Experience vs Story Experience */}
-      {stage !== "story" ? (
-        <HeroExperience
-          currentStep={heroStep}
-          setStep={handleSetHeroStep}
-          onStoryTransition={handleStoryTransition}
+        {/* Ambient Lighting & Dust Particles */}
+        <AmbientGlow
+          variant={
+            stage === "gate" || stage === "hero"
+              ? "hero"
+              : stage === "memories" || stage === "constellation"
+              ? "universe"
+              : "subtle"
+          }
         />
-      ) : (
-        <StoryExperience onReplay={handleReplay} />
-      )}
+        <FloatingParticles slowDown={stage === "hero"} />
 
-      {/* Global Background Romantic Music Controller */}
-      <MusicController />
-    </main>
+        {/* Desktop Heartbeat Custom Cursor */}
+        <HeartbeatCursor />
+
+        {/* Opening Hero Experience vs Story Experience */}
+        {stage !== "story" ? (
+          <HeroExperience
+            currentStep={heroStep}
+            setStep={handleSetHeroStep}
+            onStoryTransition={handleStoryTransition}
+          />
+        ) : (
+          <StoryExperience onReplay={handleReplay} />
+        )}
+
+        {/* Global Background Romantic Music Controller */}
+        <MusicController />
+      </main>
+    </LanguageProvider>
   );
 }
 

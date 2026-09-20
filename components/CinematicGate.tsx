@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import GateDoors from "./GateDoors";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface CinematicGateProps {
   onOpenGate: () => void;
@@ -11,6 +12,7 @@ interface CinematicGateProps {
 
 export default function CinematicGate({ onOpenGate }: CinematicGateProps) {
   const [isOpening, setIsOpening] = useState(false);
+  const { t } = useLanguage();
 
   const handleOpen = () => {
     if (isOpening) return;
@@ -58,7 +60,7 @@ export default function CinematicGate({ onOpenGate }: CinematicGateProps) {
           transition={{ duration: 1.5, delay: 0.4 }}
           className="font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-[#FFF7FA] font-light tracking-[0.15em] sm:tracking-[0.25em] md:tracking-[0.3em] uppercase mb-3 sm:mb-4"
         >
-          FOR ANNI ❤️
+          {t("forAnni")}
         </motion.h1>
 
         {/* Subtitle */}
@@ -68,7 +70,7 @@ export default function CinematicGate({ onOpenGate }: CinematicGateProps) {
           transition={{ duration: 1.2, delay: 0.7 }}
           className="font-editorial text-lg sm:text-xl md:text-2xl text-[#E8B4C8] mb-8 sm:mb-10 italic max-w-md px-2"
         >
-          &ldquo;A birthday surprise made with love, just for you...&rdquo;
+          {t("gateQuote")}
         </motion.p>
 
         {/* Open Button */}
@@ -84,13 +86,13 @@ export default function CinematicGate({ onOpenGate }: CinematicGateProps) {
             className="group relative px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#D6B36A]/40 bg-[#0C0710]/90 text-[#FFF7FA] hover:text-[#D6B36A] hover:border-[#D6B36A] transition-all duration-500 shadow-[0_0_25px_rgba(214,179,106,0.15)] hover:shadow-[0_0_40px_rgba(214,179,106,0.3)] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-medium transition-colors">
-              OPEN YOUR SURPRISE
+              {t("openSurprise")}
             </span>
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-[#D6B36A]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </button>
 
           <span className="mt-2.5 sm:mt-3 text-[10px] sm:text-[11px] text-[#BBAEB6]/60 tracking-[0.2em] uppercase font-light">
-            Tap to begin
+            {t("tapToBegin")}
           </span>
         </motion.div>
       </motion.div>

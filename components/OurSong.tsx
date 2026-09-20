@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Play, Pause, Volume2, VolumeX, Disc } from "lucide-react";
-import { loveStory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function OurSong() {
-  const { ch09 } = loveStory.chapters;
+  const { story } = useLanguage();
+  const { ch09 } = story.chapters;
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(0.7);

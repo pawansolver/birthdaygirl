@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import CinematicPhoto from "./CinematicPhoto";
 import { StoryMemory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface MemoryBubbleProps {
   memory: StoryMemory;
@@ -11,7 +12,7 @@ interface MemoryBubbleProps {
   positionClass: string;
 }
 
-const memoryLabels: Record<number, string> = {
+const memoryLabelsEn: Record<number, string> = {
   1: "First Smile",
   2: "Your Laughter",
   3: "Quiet Moments",
@@ -20,13 +21,24 @@ const memoryLabels: Record<number, string> = {
   6: "Forever Us",
 };
 
+const memoryLabelsHi: Record<number, string> = {
+  1: "पहली मुस्कान",
+  2: "तुम्हारी हंसी",
+  3: "सुकून भरे पल",
+  4: "हाथों में हाथ",
+  5: "मासूम दिल",
+  6: "हमेशा साथ",
+};
+
 export default function MemoryBubble({
   memory,
   index,
   onClick,
   positionClass,
 }: MemoryBubbleProps) {
-  const label = memoryLabels[memory.id] || memory.title;
+  const { language } = useLanguage();
+  const labels = language === "hi" ? memoryLabelsHi : memoryLabelsEn;
+  const label = labels[memory.id] || memory.title;
 
   return (
     <motion.div

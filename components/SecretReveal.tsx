@@ -5,10 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Lock, Unlock, Heart, Eye, ZoomIn } from "lucide-react";
 import CinematicPhoto from "./CinematicPhoto";
 import PhotoLightbox from "./PhotoLightbox";
-import { loveStory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function SecretReveal() {
-  const { ch11 } = loveStory.chapters;
+  const { story, t, language } = useLanguage();
+  const { ch11 } = story.chapters;
   const [isOpen, setIsOpen] = useState(false);
   const [isPulsing, setIsPulsing] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -66,13 +67,13 @@ export default function SecretReveal() {
               disabled={isPulsing}
               className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-full border border-[#D6B36A] bg-[#160A13] text-white hover:text-[#D6B36A] text-[11px] sm:text-xs font-sans uppercase tracking-[0.2em] sm:tracking-[0.25em] font-semibold transition-all shadow-[0_0_30px_rgba(214,179,106,0.25)] hover:shadow-[0_0_45px_rgba(214,179,106,0.4)] cursor-pointer disabled:opacity-50"
             >
-              OPEN IT
+              {language === "hi" ? "वादा देखें ✦" : "OPEN IT"}
             </button>
             <button
               onClick={() => {}}
               className="text-[11px] sm:text-xs font-sans uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#E8B4C8] hover:text-white transition-colors py-1.5 sm:py-2 px-3 sm:px-4 cursor-pointer font-medium"
             >
-              Maybe later
+              {language === "hi" ? "थोड़ी देर बाद" : "Maybe later"}
             </button>
           </div>
         </motion.div>
@@ -116,7 +117,7 @@ export default function SecretReveal() {
               >
                 <Eye className="w-3.5 h-3.5 text-[#D6B36A] animate-pulse" />
                 <span className="text-[10px] sm:text-xs font-sans uppercase tracking-[0.2em] font-semibold text-white whitespace-nowrap">
-                  TAP TO VIEW FULL PHOTO
+                  {t("tapToViewFull")}
                 </span>
               </button>
             </div>
@@ -142,7 +143,7 @@ export default function SecretReveal() {
           <div className="flex items-center gap-2 text-[#FFD7E5]">
             <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current animate-pulse text-[#FFD7E5]" />
             <span className="text-[11px] sm:text-xs font-sans uppercase tracking-[0.2em] sm:tracking-[0.25em] font-semibold text-[#FFD7E5]">
-              Just for you
+              {language === "hi" ? "सिर्फ तुम्हारे लिए" : "Just for you"}
             </span>
           </div>
         </motion.div>

@@ -6,7 +6,8 @@ import { X, ChevronDown, Eye, ZoomIn } from "lucide-react";
 import MemoryBubble from "./MemoryBubble";
 import CinematicPhoto from "./CinematicPhoto";
 import PhotoLightbox from "./PhotoLightbox";
-import { loveStory, StoryMemory } from "@/data/loveStory";
+import { StoryMemory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface MemoryUniverseProps {
   onContinue: () => void;
@@ -15,7 +16,8 @@ interface MemoryUniverseProps {
 export default function MemoryUniverse({ onContinue }: MemoryUniverseProps) {
   const [activeMemory, setActiveMemory] = useState<StoryMemory | null>(null);
   const [lightboxMemory, setLightboxMemory] = useState<StoryMemory | null>(null);
-  const { memories, hero } = loveStory;
+  const { story, t, language } = useLanguage();
+  const { memories, hero } = story;
 
   // Symmetrical Left & Right positions so Top Heading and Bottom Continue Button NEVER overlap!
   // Left side: 01 (Top-Left), 02 (Mid-Left), 03 (Bottom-Left)
@@ -53,12 +55,12 @@ export default function MemoryUniverse({ onContinue }: MemoryUniverseProps) {
           className="bg-[#0C0710]/90 border border-[#D6B36A]/35 backdrop-blur-md px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full shadow-[0_4px_25px_rgba(5,3,8,0.9)] inline-block max-w-[92vw]"
         >
           <p className="font-editorial text-xs sm:text-base md:text-xl text-white italic font-normal">
-            &ldquo;Six precious moments with you, Anni... each one a piece of my heart.&rdquo;
+            {t("sixMomentsHeading")}
           </p>
         </motion.div>
         <div className="mt-1.5">
           <span className="text-[9px] sm:text-xs font-sans uppercase tracking-[0.2em] text-[#E6CA7E] font-semibold">
-            ✦ Tap any moment to open ✦
+            {t("tapMomentToOpen")}
           </span>
         </div>
       </div>
@@ -113,7 +115,7 @@ export default function MemoryUniverse({ onContinue }: MemoryUniverseProps) {
           className="group flex flex-col items-center gap-1 sm:gap-1.5 text-white hover:text-[#D6B36A] transition-colors duration-300 cursor-pointer"
         >
           <span className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] font-semibold">
-            CONTINUE
+            {t("continue")}
           </span>
           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#D6B36A]/50 flex items-center justify-center group-hover:border-[#D6B36A] group-hover:shadow-[0_0_15px_rgba(214,179,106,0.4)] transition-all">
             <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D6B36A] animate-bounce" />
@@ -181,7 +183,7 @@ export default function MemoryUniverse({ onContinue }: MemoryUniverseProps) {
                   >
                     <Eye className="w-3 h-3 text-[#D6B36A] animate-pulse" />
                     <span className="text-[9px] sm:text-xs font-sans uppercase tracking-[0.2em] font-semibold text-white whitespace-nowrap">
-                      TAP TO VIEW FULL PHOTO
+                      {t("tapToViewFull")}
                     </span>
                   </button>
                 </div>
@@ -189,7 +191,7 @@ export default function MemoryUniverse({ onContinue }: MemoryUniverseProps) {
 
               {/* Memory Details */}
               <span className="text-[10px] sm:text-xs font-sans tracking-[0.25em] text-[#E6CA7E] uppercase mb-1.5 sm:mb-2 font-semibold">
-                MEMORY 0{activeMemory.id}
+                {language === "hi" ? `याद 0${activeMemory.id}` : `MEMORY 0${activeMemory.id}`}
               </span>
               <h3 className="font-heading text-xl sm:text-3xl text-white font-medium mb-2 sm:mb-3">
                 {activeMemory.title}
@@ -210,7 +212,7 @@ export default function MemoryUniverse({ onContinue }: MemoryUniverseProps) {
                 }}
                 className="px-6 py-2.5 rounded-full border border-[#D6B36A] bg-[#160A13] text-xs font-sans uppercase tracking-[0.2em] text-white hover:text-[#D6B36A] hover:border-[#D6B36A] transition-all cursor-pointer font-semibold shadow-sm touch-manipulation active:scale-95"
               >
-                CLOSE MEMORY
+                {t("closeMemory")}
               </button>
 
             </motion.div>

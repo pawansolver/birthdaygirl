@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MailOpen } from "lucide-react";
-import { loveStory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface LoveLetterProps {
   variant: "envelope" | "full"; // envelope = Chapter 05, full = Chapter 10
@@ -11,7 +11,8 @@ interface LoveLetterProps {
 
 export default function LoveLetter({ variant }: LoveLetterProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { ch05, ch10 } = loveStory.chapters;
+  const { story, language } = useLanguage();
+  const { ch05, ch10 } = story.chapters;
 
 
   if (variant === "envelope") {
@@ -50,7 +51,7 @@ export default function LoveLetter({ variant }: LoveLetterProps) {
                 onClick={() => setIsOpen(true)}
                 className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-full border border-[#D6B36A] bg-[#160A13] text-white hover:text-[#D6B36A] text-[11px] sm:text-xs font-sans uppercase tracking-[0.2em] sm:tracking-[0.25em] font-semibold transition-all shadow-[0_0_25px_rgba(214,179,106,0.2)] hover:shadow-[0_0_35px_rgba(214,179,106,0.4)] cursor-pointer"
               >
-                OPEN THE LETTER
+                {language === "hi" ? "ख़त खोलें 💌" : "OPEN THE LETTER"}
               </button>
             ) : (
               <motion.div

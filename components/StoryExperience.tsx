@@ -13,7 +13,7 @@ import BirthdayFinale from "./BirthdayFinale";
 import ReplayExperience from "./ReplayExperience";
 import ProgressIndicator from "./ProgressIndicator";
 import ChapterNavigation from "./ChapterNavigation";
-import { loveStory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface StoryExperienceProps {
   onReplay: () => void;
@@ -30,7 +30,8 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
     mobilePos?: string;
   } | null>(null);
 
-  const { ch01, ch02, ch03, ch04, ch06, ch07, ch08 } = loveStory.chapters;
+  const { story, t, language } = useLanguage();
+  const { ch01, ch02, ch03, ch04, ch05, ch06, ch07, ch08, ch09, ch10, ch11 } = story.chapters;
 
   // Track visible chapter using IntersectionObserver (0 layout reflows, buttery smooth 60fps on mobile)
   useEffect(() => {
@@ -84,7 +85,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
         id="chapter-01"
         chapterNumber={ch01.number}
         title={ch01.title}
-        subtitle="Some stories begin with a moment"
+        subtitle={language === "hi" ? "कुछ कहानियां एक खूबसूरत पल से शुरू होती हैं" : "Some stories begin with a moment"}
       >
         <div className="w-full flex flex-col md:flex-row items-center gap-5 md:gap-12 max-w-4xl mx-auto">
           <motion.div
@@ -121,7 +122,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
             ))}
             <div className="pt-1 sm:pt-2">
               <span className="text-[10px] sm:text-xs font-sans uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#E6CA7E] font-semibold">
-                The prelude to us
+                {t("thePreludeToUs")}
               </span>
             </div>
           </motion.div>
@@ -135,7 +136,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
         id="chapter-02"
         chapterNumber={ch02.number}
         title={ch02.title}
-        subtitle="It was never only the big moments"
+        subtitle={language === "hi" ? "सिर्फ बड़ी बातें ही नहीं थीं" : "It was never only the big moments"}
       >
         <div className="w-full space-y-3 sm:space-y-4 max-w-4xl mx-auto">
           <div className="text-center max-w-lg mx-auto mb-2 sm:mb-3">
@@ -148,7 +149,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
               </p>
             ))}
             <span className="text-[10px] sm:text-xs font-sans uppercase tracking-[0.2em] text-[#E6CA7E] font-semibold">
-              ✦ Tap any moment to highlight
+              {t("tapAnyMoment")}
             </span>
           </div>
 
@@ -189,7 +190,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
         id="chapter-03"
         chapterNumber={ch03.number}
         title={ch03.title}
-        subtitle="Some people have a beautiful smile. Yours became my favorite place."
+        subtitle={language === "hi" ? "मुस्कुराते तो बहुत लोग हैं, लेकिन तुम्हारी मुस्कान मेरा जहां बन गई।" : "Some people have a beautiful smile. Yours became my favorite place."}
       >
         <div className="w-full flex flex-col items-center">
           <motion.div
@@ -228,7 +229,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
         id="chapter-04"
         chapterNumber={ch04.number}
         title={ch04.title}
-        subtitle="Moments preserved in quiet light"
+        subtitle={language === "hi" ? "खामोश लम्हों में कैद हमारी खूबसूरत यादें" : "Moments preserved in quiet light"}
       >
         <div className="w-full max-w-5xl mx-auto space-y-3">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4">
@@ -286,8 +287,8 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
       <Chapter
         id="chapter-05"
         chapterNumber="05"
-        title="THINGS I NEVER SAID"
-        subtitle="Unspoken feelings given words"
+        title={ch05.title}
+        subtitle={language === "hi" ? "दिल की वो अनकही बातें जिन्हें लफ्ज़ मिल गए" : "Unspoken feelings given words"}
       >
         <LoveLetter variant="envelope" />
       </Chapter>
@@ -299,7 +300,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
         id="chapter-06"
         chapterNumber={ch06.number}
         title={ch06.title}
-        subtitle="Six reasons out of countless more"
+        subtitle={language === "hi" ? "अनगिनत वजहों में से सिर्फ छह खास वजहें" : "Six reasons out of countless more"}
       >
         <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3 md:gap-4 max-w-4xl mx-auto">
           {ch06.cards.map((card, idx) => (
@@ -325,7 +326,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
               </div>
               <div className="mt-2 sm:mt-3 pt-1.5 sm:pt-2 border-t border-[#FFF7FA]/10 flex items-center justify-between text-[#E6CA7E] text-xs">
                 <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#E6CA7E]" />
-                <span className="tracking-[0.15em] uppercase text-[8px] sm:text-[9px] font-semibold text-[#E6CA7E]">CHERISHED</span>
+                <span className="tracking-[0.15em] uppercase text-[8px] sm:text-[9px] font-semibold text-[#E6CA7E]">{t("cherished")}</span>
               </div>
             </motion.div>
           ))}
@@ -339,7 +340,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
         id="chapter-07"
         chapterNumber={ch07.number}
         title={ch07.title}
-        subtitle="Two souls wandering into the same orbit"
+        subtitle={language === "hi" ? "दो रूहें जो एक ही कायनात में आ मिलीं" : "Two souls wandering into the same orbit"}
       >
         <div className="w-full max-w-2xl mx-auto text-center space-y-4 sm:space-y-5">
           <div className="relative py-5 sm:py-7 md:py-9 px-4 sm:px-6 rounded-2xl sm:rounded-3xl bg-radial from-[#160A13] via-[#0C0710] to-[#050308] border border-[#D6B36A]/20 shadow-[0_0_60px_rgba(214,179,106,0.1)]">
@@ -375,7 +376,7 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
         id="chapter-08"
         chapterNumber={ch08.number}
         title={ch08.title}
-        subtitle="I'd stay in our happiest moments a little longer"
+        subtitle={language === "hi" ? "मैं अपनी सबसे हसीन यादों में थोड़ा और ठहरना चाहता हूँ" : "I'd stay in our happiest moments a little longer"}
       >
         <div className="w-full space-y-3 sm:space-y-4 max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
@@ -424,8 +425,8 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
       <Chapter
         id="chapter-09"
         chapterNumber="09"
-        title="OUR SONG"
-        subtitle="A melody that belongs only to us"
+        title={ch09.title}
+        subtitle={language === "hi" ? "एक ऐसी धुन जो सिर्फ हमारी है" : "A melody that belongs only to us"}
       >
         <OurSong />
       </Chapter>
@@ -436,8 +437,8 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
       <Chapter
         id="chapter-10"
         chapterNumber="10"
-        title="A LETTER FOR YOU"
-        subtitle="Written from the quietest depths of my heart"
+        title={ch10.title}
+        subtitle={language === "hi" ? "दिल की सबसे गहरी गहराइयों से लिखा गया" : "Written from the quietest depths of my heart"}
       >
         <LoveLetter variant="full" />
       </Chapter>
@@ -448,8 +449,8 @@ export default function StoryExperience({ onReplay }: StoryExperienceProps) {
       <Chapter
         id="chapter-11"
         chapterNumber="11"
-        title="THE SECRET"
-        subtitle="A private message kept just for you"
+        title={ch11.title}
+        subtitle={language === "hi" ? "सिर्फ तुम्हारे लिए रखा गया एक खास पैगाम" : "A private message kept just for you"}
       >
         <SecretReveal />
       </Chapter>

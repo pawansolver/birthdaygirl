@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import CinematicPhoto from "./CinematicPhoto";
-import { loveStory } from "@/data/loveStory";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ConstellationProps {
   onStoryContinue: () => void;
@@ -14,7 +14,8 @@ export default function Constellation({ onStoryContinue }: ConstellationProps) {
   const [phase, setPhase] = useState<"intro" | "stars" | "revealed">("intro");
   const [introStep, setIntroStep] = useState(1);
   const [isBlooming, setIsBlooming] = useState(false);
-  const { constellation } = loveStory;
+  const { story, t } = useLanguage();
+  const { constellation } = story;
 
   useEffect(() => {
     // Intro text sequence
@@ -222,7 +223,7 @@ export default function Constellation({ onStoryContinue }: ConstellationProps) {
                 transition={{ delay: 1.8, duration: 1 }}
                 className="mt-2.5 sm:mt-3 text-[9px] sm:text-xs font-sans uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#D6B36A] font-semibold animate-pulse whitespace-nowrap"
               >
-                TAP THE STAR
+                {t("tapTheStar")}
               </motion.span>
             </div>
           </div>
@@ -287,7 +288,7 @@ export default function Constellation({ onStoryContinue }: ConstellationProps) {
             onClick={onStoryContinue}
             className="group px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-[#D6B36A] bg-[#0C0710]/95 text-white hover:text-[#D6B36A] hover:border-[#D6B36A] transition-all duration-300 shadow-[0_0_25px_rgba(214,179,106,0.2)] hover:shadow-[0_0_40px_rgba(214,179,106,0.4)] flex items-center gap-2.5 sm:gap-3 cursor-pointer font-semibold text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em]"
           >
-            <span>OUR STORY CONTINUES</span>
+            <span>{t("ourStoryContinues")}</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D6B36A] group-hover:translate-x-1 transition-transform" />
           </motion.button>
         </motion.div>
